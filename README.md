@@ -11,3 +11,13 @@ https://github.com/crisHermA02/Ferreteria-ElTarugo
 - PostgreSQL
 - npm
 - bcrypt
+
+### Estado del proyecto
+
+| Estado | Módulo / Tarea | Descripción |
+| :--- | :--- | :--- |
+|  **Hecho** | Base de datos inicial (`Rol` y `User`) | Creación de tablas y relación de roles en PostgreSQL |
+|  **Hecho** | Configuración del servidor | Express, CORS, manejo de JSON, ruta 404 y conexión con `pg` |
+|  **Hecho** | Autenticación (`/api/auth`) | Registro con `bcrypt`, validación de duplicados y login con JWT |
+|  **Hecho** | CRUD de usuarios (`/api/usuarios`) | Endpoints para listar (`GET`), actualizar (`PUT`) y eliminar (`DELETE`) |
+|  **Hecho** | Conexión con el Frontend | Registro e inicio de sesión funcionando desde la web hacia la BD |
