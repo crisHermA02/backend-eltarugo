@@ -12,6 +12,7 @@ https://github.com/crisHermA02/Ferreteria-ElTarugo
 - PostgreSQL
 - npm
 - bcrypt
+- swagger
 
 ### Estado del proyecto
 
