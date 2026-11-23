@@ -13,9 +13,13 @@ https://github.com/crisHermA02/Ferreteria-ElTarugo
 - npm
 - bcrypt
 - swagger
-
+- 
+## Documentación API (Swagger)
+La documentación interactiva de los endpoints de autenticación y usuarios está disponible en:
+- **Producción (EC2):** http://44.218.174.107:3000/api-docs
+- **Local:** http://localhost:3000/api-docs
+- 
 ### Estado del proyecto
-
 | Estado | Módulo / Tarea | Descripción |
 | :--- | :--- | :--- |
 |  **Hecho** | Base de datos inicial (`Rol` y `User`) | Creación de tablas y relación de roles en PostgreSQL |
@@ -23,3 +27,4 @@ https://github.com/crisHermA02/Ferreteria-ElTarugo
 |  **Hecho** | Autenticación (`/api/auth`) | Registro con `bcrypt`, validación de duplicados y login con JWT |
 |  **Hecho** | CRUD de usuarios (`/api/usuarios`) | Endpoints para listar (`GET`), actualizar (`PUT`) y eliminar (`DELETE`) |
 |  **Hecho** | Conexión con el Frontend | Registro e inicio de sesión funcionando desde la web hacia la BD |
+|  **Hecho** | Documentación con Swagger
