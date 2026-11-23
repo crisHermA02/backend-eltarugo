@@ -3,8 +3,9 @@
 ### Repo del frontend.
 https://github.com/crisHermA02/Ferreteria-ElTarugo 
 
-### Tablas implementadas actualmente
-<img width="236" height="285" alt="{A35EDBE5-59C5-4368-9EA3-F526AFC8C2D8}" src="https://github.com/user-attachments/assets/22b78e12-c8f5-4e77-a1a2-d0525f10fb44" />
+### Tablas implementadas actualmente en la base de datos
+<img width="649" height="839" alt="{5FADF5FE-D50E-4268-BB7A-FED90C4CE683}" src="https://github.com/user-attachments/assets/9b82e968-cf13-4be9-9979-5ca8ee7ae211" />
+
 
 ### Stack tecnologico:
 - Node.js con express cors
