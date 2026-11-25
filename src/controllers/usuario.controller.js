@@ -2,7 +2,12 @@ const grupoConexiones = require('../config/db');
 
 async function listarUsuarios(peticion, respuesta) {
     try {
-        const consultaSql = 'SELECT id_user, email, nombre_user, rut_user, telefono_user, id_rol FROM users ORDER BY id_user ASC';
+        const consultaSql = `
+            SELECT id_user, email, nombre_user, rut_user, telefono_user, id_rol 
+            FROM users 
+            WHERE id_rol IN (1, 2, 3) 
+            ORDER BY id_user ASC
+        `;
         const resultado = await grupoConexiones.query(consultaSql);
         respuesta.status(200).json(resultado.rows);
     } catch (error) {
