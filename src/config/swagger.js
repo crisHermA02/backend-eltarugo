@@ -6,7 +6,7 @@ const swaggerDocument = {
     description: 'Endpoints de autenticación y gestión de usuarios',
   },
   servers: [
-    { url: process.env.URL_FRONTEND, description: 'Servidor EC2' },
+    { url: 'http://44.218.174.107:3000/api', description: 'Servidor EC2' },
     { url: 'http://localhost:3000/api', description: 'Local' },
   ],
   components: {
@@ -29,10 +29,10 @@ const swaggerDocument = {
             'application/json': {
               schema: {
                 type: 'object',
-                required: ['email', 'password'],
+                required: ['email', 'contrasena'],
                 properties: {
-                  email: { type: 'string', example: 'JorgeAlex@email.com' },
-                  password: { type: 'string', example: '123456' },
+                  email: { type: 'string', example: 'usuarioswagger@test.cl' },
+                  contrasena: { type: 'string', example: '123456' },
                 },
               },
             },
@@ -41,6 +41,35 @@ const swaggerDocument = {
         responses: {
           200: { description: 'Login exitoso (devuelve token)' },
           401: { description: 'Credenciales inválidas' },
+        },
+      },
+    },
+    '/auth/registro': {
+      post: {
+        tags: ['Autenticación'],
+        summary: 'Registrar un nuevo usuario cliente (con contraseña)',
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                required: ['nombre_user', 'email', 'contrasena', 'id_rol'],
+                properties: {
+                  nombre_user: { type: 'string', example: 'Juan Pérez' },
+                  email: { type: 'string', example: 'juan@email.cl' },
+                  contrasena: { type: 'string', example: '123456' },
+                  rut_user: { type: 'string', example: '12.345.678-9' },
+                  telefono_user: { type: 'string', example: '+56912345678' },
+                  id_rol: { type: 'integer', example: 2 },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          201: { description: 'Usuario registrado exitosamente (contraseña hasheada con bcrypt)' },
+          400: { description: 'Datos inválidos o correo ya registrado' },
         },
       },
     },
@@ -68,8 +97,8 @@ const swaggerDocument = {
                 properties: {
                   nombre_user: { type: 'string', example: 'Raúl Cuevas' },
                   email: { type: 'string', example: 'raucuevas@cuevamail.cl' },
-                  rut: { type: 'string', example: '8.337.523-4' },
-                  telefono: { type: 'string', example: '+56912345678' },
+                  rut_user: { type: 'string', example: '8.337.523-4' },
+                  telefono_user: { type: 'string', example: '+56912345678' },
                   id_rol: { type: 'integer', example: 2 },
                   direccion: { type: 'string', example: 'Los Montes, 1232, Lo Carro' },
                 },
@@ -100,8 +129,8 @@ const swaggerDocument = {
                 properties: {
                   nombre_user: { type: 'string' },
                   email: { type: 'string' },
-                  rut: { type: 'string' },
-                  telefono: { type: 'string' },
+                  rut_user: { type: 'string' },
+                  telefono_user: { type: 'string' },
                   id_rol: { type: 'integer' },
                   direccion: { type: 'string' },
                 },
