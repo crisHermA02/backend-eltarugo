@@ -8,7 +8,7 @@ const verificarToken = (req, res, next) => {
         return res.status(403).json({ mensaje: 'No se proporcionó un token de autenticación' });
     }
 
-    jwt.verify(token, process.env.JWT_SECRET || 'secreto_super_seguro', (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             return res.status(401).json({ mensaje: 'Token inválido o expirado' });
         }
