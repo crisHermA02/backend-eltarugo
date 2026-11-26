@@ -18,7 +18,8 @@ https://github.com/crisHermA02/Ferreteria-ElTarugo
 La documentación interactiva de los endpoints de autenticación y usuarios está disponible en:
 - **Producción (EC2):** http://44.218.174.107:3000/api-docs
 - **Local:** http://localhost:3000/api-docs
-<img width="1561" height="900" alt="{FCAA1C88-8894-4655-9F72-96D5F72E23A3}" src="https://github.com/user-attachments/assets/1c3faad4-53de-4fc1-b482-f68af003bfa2" />
+<img width="1479" height="824" alt="{C64611E3-0C9C-4A17-A248-2FF0F7CBBA03}" src="https://github.com/user-attachments/assets/4498ec06-7473-47ec-831c-43b4e3e8f7e6" />
+
 
 ### Estado del proyecto
 | Estado | Módulo / Tarea | Descripción |
