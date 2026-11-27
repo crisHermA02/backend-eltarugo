@@ -2,8 +2,18 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const grupoConexiones = require('../config/db');
 
+const ROL_CLIENTE = 2;
+const LARGO_MINIMO_CLAVE = 6;
+
 async function registrarUsuario(peticion, respuesta) {
-    const { email, nombre_user, contrasena, rut_user, telefono_user, id_rol } = peticion.body;
+    const { email, nombre_user, contrasena, rut_user, telefono_user } = peticion.body;
+
+    if (!email || !nombre_user || !contrasena) {
+        return respuesta.status(400).json({ error: 'Nombre, correo y contraseña son obligatorios' });
+    }
+    if (contrasena.length < LARGO_MINIMO_CLAVE) {
+        return respuesta.status(400).json({ error: `La contraseña debe tener al menos ${LARGO_MINIMO_CLAVE} caracteres` });
+    }
 
     try {
         const rondasSal = 10;
@@ -13,9 +23,9 @@ async function registrarUsuario(peticion, respuesta) {
             INSERT INTO users (email, nombre_user, hash_contrasena, rut_user, telefono_user, id_rol)
             VALUES ($1, $2, $3, $4, $5, $6) RETURNING id_user, email, nombre_user;
         `;
-        
+
         const resultado = await grupoConexiones.query(consultaSql, [
-            email, nombre_user, hashContrasena, rut_user, telefono_user, id_rol
+            email, nombre_user, hashContrasena, rut_user, telefono_user, ROL_CLIENTE
         ]);
 
         respuesta.status(201).json({ mensaje: 'Usuario registrado exitosamente', usuario: resultado.rows[0] });
@@ -37,14 +47,14 @@ async function iniciarSesion(peticion, respuesta) {
 
     try {
         const resultado = await grupoConexiones.query('SELECT * FROM users WHERE email = $1', [email]);
-        
+
         if (resultado.rows.length === 0) {
             return respuesta.status(401).json({ error: 'Credenciales inválidas' });
         }
 
         const usuario = resultado.rows[0];
         const claveValida = await bcrypt.compare(contrasena, usuario.hash_contrasena);
-        
+
         if (!claveValida) {
             return respuesta.status(401).json({ error: 'Credenciales inválidas' });
         }
@@ -55,12 +65,13 @@ async function iniciarSesion(peticion, respuesta) {
             { expiresIn: '2h' }
         );
 
-        respuesta.status(200).json({ 
-            mensaje: 'Inicio de sesión exitoso', 
+        respuesta.status(200).json({
+            mensaje: 'Inicio de sesión exitoso',
             token,
             usuario: {
                 id_user: usuario.id_user,
                 nombre: usuario.nombre_user,
+                email: usuario.email,
                 rol: usuario.id_rol
             }
         });
@@ -71,4 +82,9 @@ async function iniciarSesion(peticion, respuesta) {
     }
 }
 
-module.exports = { registrarUsuario, iniciarSesion };
+function obtenerSesion(peticion, respuesta) {
+    const { id_user, nombre, email, id_rol } = peticion.usuario;
+    respuesta.status(200).json({ usuario: { id_user, nombre, email, rol: id_rol } });
+}
+
+module.exports = { registrarUsuario, iniciarSesion, obtenerSesion };
